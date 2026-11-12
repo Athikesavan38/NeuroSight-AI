@@ -1,0 +1,73 @@
+{% extends 'index.html' %}
+
+{% block navbar %}
+  <li><a href="{{url_for('home')}}">Home</a></li>
+  <li><a href="{{url_for('about')}}">About</a></li>
+  <li><a href="{{url_for('prediction')}}" class="active">Prediction</a></li>
+  <li><a href="{{url_for('logout')}}">LogOut</a></li>     
+{% endblock %}
+
+{% block content %}
+    <main class="main">
+        <div class="page-title" style="background-image: url(/static/img/background1.jpg); padding: 60px 0;">
+            <div class="container position-relative text-center">
+                <h1 style="color: #fff; font-size: 2.5rem; font-weight: 700;">Brain Hemorrhage Detection</h1>
+                <p style="color: #e0e0e0; font-size: 1.1rem;">AI-Powered CT Scan Analysis & Classification</p>
+                
+                {% if prediction %}
+                    <div style="margin-top: 25px; display: inline-block; max-width: 600px; width: 100%;">
+                        {% if prediction_type == 'danger' %}
+                            <div class="alert alert-danger" style="background-color: #ff4d4f; color: #ffffff; border: none; border-radius: 10px; padding: 18px 25px; box-shadow: 0 4px 15px rgba(255, 77, 79, 0.4);">
+                                <h3 style="margin: 0; font-weight: bold; color: #ffffff;"><i class="bi bi-exclamation-triangle-fill"></i> Result: {{prediction}}</h3>
+                                <p style="margin: 5px 0 0 0; font-size: 1.1rem; color: #fff;">Brain Hemorrhage Detected (Confidence: {{confidence}})</p>
+                            </div>
+                        {% elif prediction_type == 'success' %}
+                            <div class="alert alert-success" style="background-color: #52c41a; color: #ffffff; border: none; border-radius: 10px; padding: 18px 25px; box-shadow: 0 4px 15px rgba(82, 196, 26, 0.4);">
+                                <h3 style="margin: 0; font-weight: bold; color: #ffffff;"><i class="bi bi-check-circle-fill"></i> Result: {{prediction}}</h3>
+                                <p style="margin: 5px 0 0 0; font-size: 1.1rem; color: #fff;">Healthy Brain Scan - No Hemorrhage Detected (Confidence: {{confidence}})</p>
+                            </div>
+                        {% else %}
+                            <div class="alert alert-warning" style="background-color: #faad14; color: #ffffff; border: none; border-radius: 10px; padding: 18px 25px; box-shadow: 0 4px 15px rgba(250, 173, 20, 0.4);">
+                                <h3 style="margin: 0; font-weight: bold; color: #ffffff;"><i class="bi bi-info-circle-fill"></i> Notice</h3>
+                                <p style="margin: 5px 0 0 0; font-size: 1.1rem; color: #fff;">{{prediction}}</p>
+                            </div>
+                        {% endif %}
+
+                        {% if file_name %}
+                            <div style="margin-top: 20px;">
+                                <img src="/static/saved_images/{{file_name}}" alt="Uploaded CT Scan" style="max-height: 260px; max-width: 100%; border-radius: 12px; border: 4px solid #ffffff; box-shadow: 0 6px 20px rgba(0,0,0,0.5);">
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <section id="contact" class="contact section" style="padding: 50px 0;">
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+                <center>
+                    <div class="col-md-6 col-sm-12" style="background: #ffffff; padding: 35px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+                        <form action="{{url_for('prediction')}}" method="post" enctype="multipart/form-data">
+                            <div class="row gy-4">
+
+                                <div class="col-12 text-center">
+                                    <h2 style="color: #333; font-weight: 700; margin-bottom: 10px;">Upload CT Scan Image</h2>
+                                    <p style="color: #666; font-size: 0.95rem;">Select a Brain CT scan image (JPG / PNG) to analyze for hemorrhages</p>
+                                </div>
+
+                                <div class="col-12">
+                                    <input type="file" class="form-control" name="file" accept=".jpg,.jpeg,.png,.bmp,.webp" required style="padding: 12px; border-radius: 8px;">
+                                </div>
+
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn btn-warning col-12" style="background-color: #feb900; color: #000; font-weight: bold; padding: 12px; border-radius: 8px; border: none; font-size: 1.05rem; transition: 0.3s;">Analyze Image</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </center>
+            </div>
+        </section>
+    </main>
+{% endblock %}

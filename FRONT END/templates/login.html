@@ -1,0 +1,53 @@
+{% extends 'index.html' %}
+
+{% block navbar %}
+  <li><a href="{{url_for('index')}}">Home</a></li>
+  <li><a href="{{url_for('register')}}">Register</a></li>
+  <li><a href="{{url_for('login')}}" class="active">Login</a></li>     
+{% endblock %}
+
+{% block content %}
+  <main class="main">
+
+    <div class="page-title" style="background-image: url(/static/img/background1.jpg); padding: 60px 0;">
+      <div class="container position-relative text-center">
+        <h1 style="color: #fff; font-size: 2.5rem; font-weight: 700;">Login</h1>
+        <p style="color: #e0e0e0; font-size: 1.1rem;">Access your Brain Hemorrhage Detection account</p>
+      </div>
+    </div>
+
+    <section id="contact" class="contact section" style="padding: 50px 0;">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <center>
+          <div class="col-md-6 col-sm-12" style="background: #ffffff; padding: 35px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+            <form action="{{url_for('login')}}" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="400">
+              <div class="row gy-4">
+
+                <div class="col-12 text-center">
+                  <h2 style="color: #333; font-weight: 700; margin-bottom: 20px;">Welcome Back</h2>
+                </div>
+
+                <div class="col-12">
+                  <input type="email" class="form-control" name="email" placeholder="Email Address" required style="padding: 12px; border-radius: 8px;">
+                </div>
+
+                <div class="col-12">
+                  <input type="password" class="form-control" name="password" placeholder="Password" required style="padding: 12px; border-radius: 8px;">
+                </div>
+
+                <div class="col-md-12 text-center">
+                  <button type="submit" class="btn btn-warning col-12" style="background-color: #feb900; color: #000; font-weight: bold; padding: 12px; border-radius: 8px; border: none; font-size: 1.05rem;">Login</button>
+                </div>
+
+                <div class="col-12 text-center" style="margin-top: 15px;">
+                  <span style="color: #666;">Don't have an account? <a href="{{ url_for('register') }}" style="color: #feb900; font-weight: 600;">Register Here</a></span>
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </center>
+      </div>
+    </section>
+  </main>
+{% endblock %}

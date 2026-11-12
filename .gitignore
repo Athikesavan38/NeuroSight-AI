@@ -1,0 +1,29 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# Large training datasets and heavy models (>100MB cannot be pushed to GitHub)
+/BACK END/Data/
+/BACK END/relevent or irrelevent/
+/BACK END/*.pt
+/BACK END/*.h5
+/BACK END/*.zip
+/FRONT END/*.h5
+
+# Runtime uploads directory (preserve folder with .gitkeep)
+/FRONT END/static/saved_images/*
+!/FRONT END/static/saved_images/.gitkeep
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
